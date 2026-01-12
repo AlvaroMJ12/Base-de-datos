@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS Empleados (
 );
 
 
-
+-- HOLA GITHUB --
 
 -- Ejercicio 2 --
 
@@ -83,3 +83,5 @@ ADD edad INT CHECK(edad BETWEEN 18 AND 100),
 ADD telefono VARCHAR(9) CHECK(telefono ~'^[67]\d{8}$');
 
 CREATE INDEX ind_nombre ON misalumnos(nombre);
+
+-- CAMBIOS PARA GITHUB --
