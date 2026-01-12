@@ -54,15 +54,12 @@ CREATE OR REPLACE PROCEDURE registrar_medalla(p_id_atleta INT, p_id_deporte INT 
 AS $$
 DECLARE
 BEGIN
-    IF NOT EXISTS(SELECT id_atleta FROM atletas WHERE id_atleta = p_id_atleta) THEN
-        RAISE EXCEPTION 'Atleta xx no existe';
-    
-    ELSIF NOT EXISTS(SELECT id_deporte FROM deporteS WHERE id_deporte = p_id_deporte) THEN 
-        RAISE EXCEPTION 'Deporte xx no existe';
-    
-    ELSIF p_medalla NOT IN ('oro', 'plata', 'bronce') THEN
-        RAISE EXCEPTION 'Medalla xx no válida';
-        
+    if not exists (select id_atleta from atletas where id_atleta = p_id_atleta) then
+		raise exception 'Atleta % no existe', p_id_atleta;
+	elsif not exists (select id_deporte from deportes where id_deporte = p_id_deporte)	then
+		raise exception 'Deporte % no existe', p_id_deporte;
+	elsif p_medalla not in ('oro', 'plata', 'bronce') then 
+		raise exception 'Medalla % no válida', p_medalla;
     ELSE
         INSERT INTO resultados(id_atleta, id_deporte, medalla, fecha_evento) VALUES(p_id_atleta, p_id_deporte, p_medalla, fecha_evento);
 
